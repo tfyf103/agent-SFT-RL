@@ -96,3 +96,15 @@ def test_public_ids_do_not_include_task_sequence():
     for t in generate_tasks("train", 100):
         assert re.fullmatch(r"case-[0-9a-f]{16}", t["case_id"])
         assert re.fullmatch(r"request-[0-9a-f]{16}", t["request_id"])
+
+
+def test_canonical_corpus_hashes_match_published_protocol():
+    # Content hashes also catch damaged Unicode during artifact publishing.
+    expected = {
+        "train": (500, "1fae9b7f0ebf6954be5bc1ffe83c199a52a0a4409ff357587d36c84265a86bd2"),
+        "valid": (200, "8f8270bd5293b5be400a64edc04bc61dd97025a5df503f032a4c0a77b961e89b"),
+        "test": (200, "624c5b2c3c464a4886599d7aabcc0a9a159f183367a8115cc57d83a7b0118643"),
+        "stress": (200, "42950b9fd784911be32f01219bedc555afa9d1f1585b33f41796a436939a1cee"),
+    }
+    for split, (count, digest) in expected.items():
+        assert canonical_hash(generate_tasks(split, count)) == digest
