@@ -1,7 +1,13 @@
 {
-  "synthetic_environment": "locally_tested",
-  "cpu_finite_action_policy": "3_seeds_executed",
-  "large_language_model_training": "not_yet_executed",
-  "official_tau_benchmark": "not_executed",
-  "bank_deployment": false
+  "updated": "2026-10-07",
+  "source_commit": "de900acbb1c8ff7a0ab49215da3abc899ef18720",
+  "environment": "tested_locally_and_github_actions_cpu",
+  "cpu_finite_policy_three_seeds": "executed_with_raw_evidence",
+  "language_model_sft_smoke": "passed_135M_3_optimizer_steps",
+  "language_model_bank_quality_experiment": "not_executed",
+  "language_model_grpo": "not_executed",
+  "slime_adapter": "contract_tested_distributed_run_not_executed",
+  "official_tau": "not_executed",
+  "production_bank_deployment": false,
+  "run_url": "https://github.com/tfyf103/agent-SFT-RL/actions/runs/37505944936"
 }

@@ -1,0 +1,91 @@
+{
+  "experiment": "CPU toy MLP tool-selection SFT and group-relative REINFORCE",
+  "not_llm": true,
+  "not_grpo": true,
+  "device": "CPU",
+  "dtype": "float64",
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "hidden": 32,
+  "max_episode_steps": 16,
+  "data_counts": {
+    "train": 500,
+    "valid": 200,
+    "test": 200,
+    "stress": 200
+  },
+  "sft": {
+    "steps": 400,
+    "batch_size": 128,
+    "learning_rate": 0.01
+  },
+  "rl": {
+    "updates": 100,
+    "groups_per_update": 4,
+    "group_size": 8,
+    "learning_rate": 0.001,
+    "reference_kl_beta": 0.02,
+    "reward": "terminal success 0/1"
+  },
+  "evaluation": "greedy argmax; final checkpoints; no validation/test checkpoint selection",
+  "arguments": "deterministic public-observation binding; not learned",
+  "features": [
+    "bias",
+    "customer",
+    "policy_observed",
+    "case_observed",
+    "materials_present",
+    "requires_materials",
+    "status_observed",
+    "one_write_verified",
+    "last_response_ok",
+    "last_response_failed",
+    "turn_fraction",
+    "last_tool:search_policy",
+    "last_tool:get_case",
+    "last_tool:collect_materials",
+    "last_tool:get_status",
+    "last_tool:submit_case",
+    "last_tool:resolve_case",
+    "last_tool:handoff",
+    "last_tool:finish",
+    "last_error:ACCESS_DENIED",
+    "last_error:READ_TIMEOUT",
+    "last_error:WRITE_TIMEOUT",
+    "last_error:STALE_POLICY",
+    "last_error:MISSING_MATERIALS",
+    "last_error:READ_REQUIRED",
+    "last_error:ROLE_DENIED",
+    "last_error:WRONG_RESOLUTION",
+    "last_error:INVALID_REQUEST_KEY",
+    "last_error:INVALID_ARGUMENT",
+    "last_error:OTHER",
+    "observed_status:draft",
+    "observed_status:assigned",
+    "observed_status:submitted",
+    "observed_status:resolved",
+    "observed_status:escalated"
+  ],
+  "actions": [
+    "search_policy",
+    "get_case",
+    "collect_materials",
+    "get_status",
+    "submit_case",
+    "resolve_case",
+    "handoff",
+    "finish"
+  ],
+  "limitations": [
+    "Synthetic cooperative environment; not real bank data or Bank of Beijing policy.",
+    "Engineered structured-state features; no natural-language understanding or RAG.",
+    "Only tool names are learned; argument binding and threshold arithmetic are rules.",
+    "Group-relative REINFORCE has no PPO clipping/old-policy ratio; not LLM GRPO.",
+    "Test shares workflow mechanics; stress holds out fault combinations, not arbitrary banking domains.",
+    "Reward uses simulator ground truth at episode end; inference sees messages only.",
+    "Same test tasks across seeds; seed standard deviation is not independent-task confidence."
+  ]
+}

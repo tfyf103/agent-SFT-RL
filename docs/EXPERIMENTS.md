@@ -13,6 +13,9 @@ train500、valid200、test200、stress200，种子由data.py固定。
 先分split再生成身份、实体和表述，stress保留组合故障。共享业务状态机，不是跨业务泛化。
 知识在运行时允许检索；保留新版本是测试条件更新，不是让模型背诵静态规则。
 生成结果见 data/generated/manifest.json，仓库保留 results/data_manifest.json。
+两者的split SHA-256针对规范化任务JSON，与文件换行符无关；任务哈希不一致时必须
+核对源码版本、任务数、中文编码与生成内容，不能用Windows/Linux换行差异解释。
+源码字节hash和整份manifest文件hash另受字节格式及运行元信息影响。
 
 CPU小策略使用确定性公开特征，忽略自然语言表述，因此不能把它的test成绩称语言泛化。
 
@@ -52,12 +55,27 @@ A 原模型；B 正常数据SFT；C 恢复数据SFT；D C+GRPO。
 至少3个训练种子，训练/验证选checkpoint，最终才测test。
 正式主实验尚无GPU执行证据，不生成虚构表格或预设“提升目标”充当成绩。
 
-## 云端CPU smoke
+## 已执行的云端CPU SFT验证
 
-Actions运行135M模型的两步SFT、加载checkpoint并续训一步，
-记录模型revision、权重hash、优化步数以及参数变化。
-它验证真实预训练模型的训练代码通路，并不测试银行Agent成功率。
-下载失败、超时或作业失败均应如实记录；只有成功verification.json才表示通过。
+[GitHub Actions运行](https://github.com/tfyf103/agent-SFT-RL/actions/runs/37505944936)的llm-training-smoke作业已成功，
+完整Torch环境下**54项测试通过**。机器为GitHub托管Ubuntu CPU runner，不是ChatGPT GPU。
+验证数据与指纹见[verification.json](../results/cloud/verification.json)。
+
+| 项目 | 实际记录 |
+|---|---|
+| 模型 | HuggingFaceTB/SmolLM2-135M-Instruct |
+| 模型revision | `12fd25f77366fa6b3b4b768ec3050bf629380bac` |
+| 训练 | CPU、float32、全参数SFT；8条短单轮JSON动作样本 |
+| 更新 | 先2个optimizer steps；重载checkpoint及训练状态，再执行1步 |
+| 检查 | 原模型、step 2、step 3重载后的完整state_dict SHA-256均不同；恢复步数断言为3 |
+| 软件 | Torch 2.6.0+cpu、Transformers 4.51.3、PEFT 0.15.2 |
+
+累计监督token从36变为54。训练日志中的NLL是训练过程累计值，不能当作独立评测损失，
+也不作为银行业务改善的证据。此次未执行语言模型GRPO、银行任务评测或GPU吞吐测试。
+
+checkpoint重载和继续更新已验证；没有额外比较“连续3步”与“2步后恢复1步”的权重完全等价。
+Actions证据包保留6个数据/配置/日志文件；未上传模型和optimizer checkpoint。
+源码入口为scripts/cpu_llm_smoke.py，未来运行可能解析到新的模型revision，应以各次记录为准。
 
 ## 官方外部评测
 

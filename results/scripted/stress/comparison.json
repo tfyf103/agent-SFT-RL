@@ -1,0 +1,106 @@
+{
+  "execution": "actual_cpu_scripted_controls",
+  "llm_training_executed": false,
+  "results": {
+    "open_loop": {
+      "n": 200,
+      "n_authorized": 157,
+      "n_denied": 43,
+      "authorized_success_rate": 0.0,
+      "authorized_success_wilson95": [
+        0,
+        0.02388436822314625
+      ],
+      "unauthorized_correct_handling_rate": 1.0,
+      "fault_task_success_rate": 0.0,
+      "authorized_false_refusal_rate": 0.0,
+      "false_completion_rate": 1.0,
+      "truncation_rate": 0.0,
+      "mean_steps_all": 3.35,
+      "mean_steps_successful_authorized": null,
+      "write_count_exceeds_one": 0,
+      "note": "Task-level synthetic metrics. Scripted runs have no sampling; do not interpret repeat runs as pass^k.",
+      "label": "scripted_open_loop",
+      "dataset_sha256": "42950b9fd784911be32f01219bedc555afa9d1f1585b33f41796a436939a1cee",
+      "runtime": {
+        "python": "3.13.13",
+        "platform": "Windows-10-10.0.19045-SP0"
+      }
+    },
+    "no_clarification": {
+      "n": 200,
+      "n_authorized": 157,
+      "n_denied": 43,
+      "authorized_success_rate": 0.6560509554140127,
+      "authorized_success_wilson95": [
+        0.578816266076926,
+        0.7258312877897353
+      ],
+      "unauthorized_correct_handling_rate": 1.0,
+      "fault_task_success_rate": 0.6560509554140127,
+      "authorized_false_refusal_rate": 0.34394904458598724,
+      "false_completion_rate": 0.0,
+      "truncation_rate": 0.0,
+      "mean_steps_all": 5.585,
+      "mean_steps_successful_authorized": 7.689320388349515,
+      "write_count_exceeds_one": 0,
+      "note": "Task-level synthetic metrics. Scripted runs have no sampling; do not interpret repeat runs as pass^k.",
+      "label": "scripted_no_clarification",
+      "dataset_sha256": "42950b9fd784911be32f01219bedc555afa9d1f1585b33f41796a436939a1cee",
+      "runtime": {
+        "python": "3.13.13",
+        "platform": "Windows-10-10.0.19045-SP0"
+      }
+    },
+    "no_readback": {
+      "n": 200,
+      "n_authorized": 157,
+      "n_denied": 43,
+      "authorized_success_rate": 0.0,
+      "authorized_success_wilson95": [
+        0,
+        0.02388436822314625
+      ],
+      "unauthorized_correct_handling_rate": 1.0,
+      "fault_task_success_rate": 0.0,
+      "authorized_false_refusal_rate": 0.0,
+      "false_completion_rate": 1.0,
+      "truncation_rate": 0.0,
+      "mean_steps_all": 5.66,
+      "mean_steps_successful_authorized": null,
+      "write_count_exceeds_one": 0,
+      "note": "Task-level synthetic metrics. Scripted runs have no sampling; do not interpret repeat runs as pass^k.",
+      "label": "scripted_no_readback",
+      "dataset_sha256": "42950b9fd784911be32f01219bedc555afa9d1f1585b33f41796a436939a1cee",
+      "runtime": {
+        "python": "3.13.13",
+        "platform": "Windows-10-10.0.19045-SP0"
+      }
+    },
+    "recovery": {
+      "n": 200,
+      "n_authorized": 157,
+      "n_denied": 43,
+      "authorized_success_rate": 1.0,
+      "authorized_success_wilson95": [
+        0.9761156317768538,
+        1
+      ],
+      "unauthorized_correct_handling_rate": 1.0,
+      "fault_task_success_rate": 1.0,
+      "authorized_false_refusal_rate": 0.0,
+      "false_completion_rate": 0.0,
+      "truncation_rate": 0.0,
+      "mean_steps_all": 6.945,
+      "mean_steps_successful_authorized": 8.02547770700637,
+      "write_count_exceeds_one": 0,
+      "note": "Task-level synthetic metrics. Scripted runs have no sampling; do not interpret repeat runs as pass^k.",
+      "label": "scripted_recovery",
+      "dataset_sha256": "42950b9fd784911be32f01219bedc555afa9d1f1585b33f41796a436939a1cee",
+      "runtime": {
+        "python": "3.13.13",
+        "platform": "Windows-10-10.0.19045-SP0"
+      }
+    }
+  }
+}

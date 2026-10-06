@@ -1,44 +1,49 @@
-# ���ж��ַ��� Agent��SFT / RL ��ɿ���ʵ��
+# 银行多轮服务 Agent：SFT / RL 与可靠性实验
 
-�Կͻ�����������Ա����������Ϊ�����о� **����ȱʧ�����߳�ʱ�͹�̱仯ʱ�Ļָ�����**��
-�ṩ��ִ�л�����ѵ�����ݡ���ʵCPUѧϰʵ�顢����ģ��ѵ����ں����� walkthrough��
+以客户工单受理和员工工单处理为任务，研究 **材料缺失、工具超时和规程变化时的恢复决策**。
+提供可执行环境、训练数据、真实CPU学习实验、语言模型训练入口和面试 walkthrough。
 
-> **�о�ԭ�ͣ������ڱ������йٷ���Ŀ������ʵ�����˻����ڲ��ƶȻ������ӿڡ�**
-> ԭ����ƽ̨Դ��δ���뱾�ֿ⡣���ֿ��Ǻ�ѵ��ʵ��ƽ̨�������������������Ǩ�ơ�
+> **研究原型；不属于北京银行官方项目。无真实银行账户、内部制度或生产接口。**
+> 原聊天平台源码未接入本仓库。本仓库是后训练实验平台，不声称完成银行生产迁移。
 
-## ��ǰ֤��״̬
+## 当前证据状态
 
-| �㼶 | ��ǰ��ʵ | ��˵��ʲô |
+| 层级 | 当前事实 | 能说明什么 |
 |---|---|---|
-| �ϳɻ��� + �ű����� | ���ڱ���CPUʵ������400���������� | ������Լ��״̬��֤���ָ����ƿ�ִ�� |
-| 1,416����NumPyС���� | ��ʵ�����3����SFT�������REINFORCE | �ṹ��״̬�»ָ��켣�����ݼ�ֵ����LLM |
-| 135Mģ��CPU SFT smoke | GitHub Actionsִ�У�״̬�Ը���ҵ��verification.jsonΪ׼ | ����֤�������¡����桢�ָ�����֤����������Ч�� |
-| Transformers����GRPO | �ο�ʵ���뵥Ԫ���� | GPU/ҵ������ʵ����δִ�� |
-| Slime������ٷ������ | �̶�����Դ�롢������� | δʵ��Ĳ��ֲ�����Ϊѵ���ɹ� |
+| 合成环境 + 脚本对照 | 已在本地与GitHub Actions CPU运行400个留出任务 | 工具契约、状态验证、恢复机制可执行 |
+| 1,416参数NumPy小策略 | 已实际完成3种子SFT和组相对REINFORCE | 结构化状态下恢复轨迹的数据价值；非LLM |
+| 135M模型CPU SFT smoke | 已通过：2步SFT后加载checkpoint，再恢复训练1步 | 仅验证参数更新、保存、恢复，不证明银行任务效果 |
+| Transformers多轮GRPO | 参考实现与单元测试 | GPU/业务质量实验尚未执行 |
+| Slime适配与官方τ外测 | 固定上游源码、复现入口 | 未实测的部分不得作为训练成果 |
 
-[�ƶ���������־](https://github.com/tfyf103/agent-SFT-RL/actions)
-�� [ʵ��Э��](docs/EXPERIMENTS.md)
-�� [����CPUʵ�鿨](results/toy_policy/EXPERIMENT_CARD.md)
-�� [�����𲽽���](docs/INTERVIEW_WALKTHROUGH.md)
+[已核验云端运行与日志](https://github.com/tfyf103/agent-SFT-RL/actions/runs/37505944936)
+· [135M验证记录](results/cloud/verification.json)
+· [实验协议](docs/EXPERIMENTS.md)
+· [完整CPU实验卡](results/toy_policy/EXPERIMENT_CARD.md)
+· [面试逐步讲解](docs/INTERVIEW_WALKTHROUGH.md)
 
-## �Ѳ�������Ҫ����ģ������
+该云端作业在安装Torch的环境下 **54项测试全部通过**，并实际训练
+HuggingFaceTB/SmolLM2-135M-Instruct。参数变化、checkpoint重载和恢复至第3步均已检查。
+这是8条短单轮样本上的训练链路验证；未进行银行任务评测或语言模型GRPO训练。
 
-������**35���ɹ۲�������8����ɢ���߶�����1,416����MLP**�������������ֵ�Ƚ���ȷ����
-��������ɡ������߱���Ȼ�������⣬�ɼ�������LLM��ٷ���-bench���֡�
+## 已测结果：不要混淆模型类型
 
-| CPUС���� | Test��Ȩ����ɹ��� | Stress��Ȩ����ɹ��� |
+以下是**35个可观测特征、8个离散工具动作的1,416参数MLP**。参数填充与阈值比较由确定性
+适配器完成。它不具备自然语言理解，成绩不代表LLM或官方τ-bench表现。
+
+| CPU小策略 | Test授权任务成功率 | Stress授权任务成功率 |
 |---|---:|---:|
-| �����켣 SFT | 55.89% �� 5.63���ٷֵ� | 0.64% �� 1.10���ٷֵ� |
-| �ָ��켣 SFT | 100.00% | 100.00% |
-| �ָ� SFT + ����� REINFORCE | 100.00% | 100.00% |
+| 正常轨迹 SFT | 55.89% ± 5.63个百分点 | 0.64% ± 1.10个百分点 |
+| 恢复轨迹 SFT | 100.00% | 100.00% |
+| 恢复 SFT + 组相对 REINFORCE | 100.00% | 100.00% |
 
-������17/29/43����Ϊ���Ӽ�������׼�Test��164����Ȩ����Stress��157����
-δ��Ȩ���񵥶����档����С���ѱ��ͣ�**û�й۲쵽RL����greedy�ɹ��ʵ�֤��**��
-���������־�����á�checkpoint�;��ޣ����ܰ�100%дΪ��ʵ���пɿ��ʡ�
+三种子17/29/43；±为种子间样本标准差。Test有164个授权任务、Stress有157个；
+未授权任务单独报告。环境小且已饱和，**没有观察到RL增加greedy成功率的证据**。
+详见完整日志、配置、checkpoint和局限，不能把100%写为真实银行可靠率。
 
-## 5��������
+## 5分钟运行
 
-Python 3.10+������GPU��ģ�����ػ�API��Կ��
+Python 3.10+，无需GPU、模型下载或API密钥：
 ```bash
 python -m pip install -e ".[dev,toy]"
 python -m pytest -q
@@ -49,19 +54,19 @@ python -m scripts.evaluate --tasks data/generated/test.jsonl --output artifacts/
 python scripts/run_toy_experiment.py --output artifacts/toy_policy
 ```
 
-���Ĭ��PowerShell����Ӱ��������ʾ����ʹ��֧��UTF-8���նˣ�JSONL�ļ��̶�UTF-8��
+如果默认PowerShell编码影响中文显示，可使用支持UTF-8的终端；JSONL文件固定UTF-8。
 
-## ����ģ��·��
+## 语言模型路径
 
-����ģ�ͷ����ͨ����ͨchat-completions�ӿڽ��룬�������JSON���߶�����
+独立模型服务可通过普通chat-completions接口接入，输出单个JSON工具动作：
 ```bash
 python -m scripts.evaluate --tasks data/generated/test.jsonl --output artifacts/model-baseline \
   --base-url http://127.0.0.1:8000/v1 --model YOUR_LOCAL_MODEL
 ```
-��ѡ��Կ�Ż������� BANK_AGENT_API_KEY����д��Git��ԭģ��/SFT/RL�ֱ�����ͬһ���÷���
-ʹ��ͬһ����ͽ���������⣬����ʧ���Լ����ĸ��
+可选密钥放环境变量 BANK_AGENT_API_KEY，不写进Git。原模型/SFT/RL分别启动同一配置服务、
+使用同一任务和解码参数评测，调用失败仍计入分母。
 
-���豸ѵ���ο���ڣ�������׼��������������������
+单设备训练参考入口（需自行准备合适算力及依赖）：
 ```bash
 python -m pip install -r requirements-train.txt
 python scripts/train_sft.py --model /models/instruct-model --offline \
@@ -70,25 +75,27 @@ python scripts/train_grpo.py --model /models/instruct-model --offline \
   --adapter outputs/sft/epoch-001/model --tasks data/generated/train.jsonl \
   --output outputs/grpo --device cuda --groups 100 --group-size 4
 ```
-Ŀ¼������ƥ��ʵ��checkpoint����Դȡ����ģ�͡������ĺ��Ż�����
-referenceΪ�̶�SFT��ʼ���ԣ������ƴ������Ѿ���A800��֤��
-[Slime��ٷ������Ĺ̶��汾˵��](docs/UPSTREAM_REPRODUCTION.md)��
+目录参数需匹配实际checkpoint；资源取决于模型、上下文和优化器。
+reference为固定SFT初始策略；不宣称此命令已经在A800验证。
+[Slime与官方τ外测的固定版本说明](docs/UPSTREAM_REPRODUCTION.md)。
 
-## ���뵼��
+## 代码导航
 
-- bank_agent/env.py�����ݡ����ߡ���̡��ݵȡ����ع��ϡ���̬�ж���
-- bank_agent/data.py���Ȼ��ֺ����ɡ�ģ�����ݡ��켣��֤��
-- bank_agent/policies.py���ɽ��ͽű�������ʾ�����ɡ�
-- bank_agent/toy_policy.py����ʵCPUС����ѧϰ��
-- bank_agent/training.py������mask������rollout��GRPO��ʧ��checkpoint��
-- bank_agent/evaluate.py��������켣����ͬ��ĸ���������䡣
-- integrations/����ѡ���ο�����䣻δ���в��ּ�����˵����
-- docs/���ܹ���ʵ�顢���֡����Ժͼ�����
+- bank_agent/env.py：身份、工具、规程、幂等、隐藏故障、终态判定。
+- bank_agent/data.py：先划分后生成、模拟数据、轨迹验证。
+- bank_agent/policies.py：可解释脚本控制与示范生成。
+- bank_agent/toy_policy.py：真实CPU小策略学习。
+- bank_agent/training.py：助手mask、多轮rollout、GRPO损失和checkpoint。
+- bank_agent/evaluate.py：逐任务轨迹、不同分母与置信区间。
+- integrations/：可选上游框架适配；未运行部分见复现说明。
+- docs/：架构、实验、复现、面试和简历。
 
-## �����Դ
+## 结果来源
 
-��ִ�н�������� results/��ԭʼ������켣�ɴ���ѹ��֤�ݰ���Actions artifacts�鿴��
-����ѵ�������ù̶��ű��ؽ���manifestУ��SHA-256��
-�������γɼ������ⲿ�ο���δ�����κα���Ŀʵ�����
+已执行结果保留在 results/，原始大体积轨迹可从其压缩证据包或Actions artifacts查看；
+生成训练数据用固定脚本重建，manifest中的任务SHA-256来自规范化JSON，应在各平台一致；
+原始文件字节hash与任务内容hash是不同的校验。135M证据包保留数据、配置及验证日志，
+模型/optimizer checkpoint仅在该次作业中完成保存重载，未作为下载产物保留。
+公开上游成绩仅是外部参考，未填入任何本项目实测表。
 
-[�ܹ�](docs/ARCHITECTURE.md) �� [�������](docs/RESUME.md) �� [��Դ������](NOTICE.md)
+[架构](docs/ARCHITECTURE.md) · [简历措辞](docs/RESUME.md) · [来源与许可](NOTICE.md)

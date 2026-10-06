@@ -1,0 +1,14 @@
+2026-10-06T17:45:32.5329896Z 54 passed in 1.92s
+2026-10-06T17:45:41.0630834Z {"completed_epoch": false, "epoch": 1, "optimizer_steps": 2, "train_token_nll": 3.5507304668426514, "supervised_tokens": 36}
+2026-10-06T17:45:50.9861337Z {"completed_epoch": false, "epoch": 1, "optimizer_steps": 3, "train_token_nll": 3.185909907023112, "supervised_tokens": 54}
+2026-10-06T17:45:56.0446939Z   "scope": "135M CPU SFT pipeline smoke only; NOT bank task accuracy",
+2026-10-06T17:45:56.0447686Z   "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+2026-10-06T17:45:56.0448118Z   "optimizer_steps": 3,
+2026-10-06T17:45:56.0448348Z   "base_state_sha256": "518dba727454feb825f560b7706d33a424f54aff9c65d2783faa543279e2a3cf",
+2026-10-06T17:45:56.0448693Z   "step2_state_sha256": "c01f4384dd668053f204c62950dafe8e2eac89c5ccd0f4f0ebd6aac4ad2bed55",
+2026-10-06T17:45:56.0449036Z   "step3_state_sha256": "9c23181a1ef8ad1508e10818146dead34e707cc1b34d579bcc1571f436218b83",
+2026-10-06T17:45:56.0449285Z   "weights_changed": true,
+2026-10-06T17:45:56.0449433Z   "checkpoint_reloaded": true,
+2026-10-06T17:45:56.0449577Z   "resume_verified": true,
+2026-10-06T17:45:56.0449721Z   "bank_evaluation_performed": false,
+2026-10-06T17:45:56.0449887Z   "grpo_training_performed": false

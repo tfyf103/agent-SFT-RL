@@ -1,0 +1,57 @@
+{
+  "label": "Actual CPU toy-policy training audit; not LLM",
+  "seeds": [
+    {
+      "seed": 17,
+      "normal_sft": {
+        "initial_loss": 2.1723150001749514,
+        "final_loss": 0.001265348567087818
+      },
+      "recovery_sft": {
+        "initial_loss": 2.183591853272343,
+        "final_loss": 0.001525822951801962
+      },
+      "rl": {
+        "nonzero_advantage_groups": 3,
+        "total_groups": 400,
+        "episodes": 3200,
+        "parameter_l2_change": 0.43468754970362633
+      }
+    },
+    {
+      "seed": 29,
+      "normal_sft": {
+        "initial_loss": 2.2155316845671558,
+        "final_loss": 0.0011899919085780674
+      },
+      "recovery_sft": {
+        "initial_loss": 2.216761008726007,
+        "final_loss": 0.0013847424081662961
+      },
+      "rl": {
+        "nonzero_advantage_groups": 1,
+        "total_groups": 400,
+        "episodes": 3200,
+        "parameter_l2_change": 0.20099460425041304
+      }
+    },
+    {
+      "seed": 43,
+      "normal_sft": {
+        "initial_loss": 2.0838831714526944,
+        "final_loss": 0.0011811132441701053
+      },
+      "recovery_sft": {
+        "initial_loss": 2.081803146583396,
+        "final_loss": 0.0013369115458759756
+      },
+      "rl": {
+        "nonzero_advantage_groups": 2,
+        "total_groups": 400,
+        "episodes": 3200,
+        "parameter_l2_change": 0.4030358740479872
+      }
+    }
+  ],
+  "rerun_reason": "Public ID opacity and completion-evidence/termination contract corrections; unchanged training configuration"
+}

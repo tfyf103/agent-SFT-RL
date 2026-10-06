@@ -1,0 +1,70 @@
+{
+  "run_id": 37505944936,
+  "url": "https://github.com/tfyf103/agent-SFT-RL/actions/runs/37505944936",
+  "source_commit": "de900acbb1c8ff7a0ab49215da3abc899ef18720",
+  "conclusion": "success",
+  "compute": "GitHub-hosted Ubuntu CPU runner",
+  "tests": {
+    "llm_runtime": {
+      "passed": 54,
+      "skipped": 0
+    },
+    "minimal_runtime": {
+      "passed": 51,
+      "skipped": 3,
+      "reason": "Torch not installed in minimal job"
+    }
+  },
+  "jobs": {
+    "llm_training_smoke": 112414513682,
+    "cpu_reproduction": 112414514028
+  },
+  "artifacts": [
+    {
+      "id": 11432110889,
+      "name": "cpu-llm-smoke-evidence",
+      "size_in_bytes": 3035,
+      "url": "https://api.github.com/repos/tfyf103/agent-SFT-RL/actions/artifacts/11432110889",
+      "archive_download_url": "https://api.github.com/repos/tfyf103/agent-SFT-RL/actions/artifacts/11432110889/zip",
+      "expired": false,
+      "created_at": "2026-10-06T17:45:57Z",
+      "expires_at": "2026-11-05T17:45:56Z",
+      "updated_at": "2026-10-06T17:45:57Z",
+      "digest": "sha256:8116ded2e45369e6c26d9d10033247ae3c47a854babefc24a1690420b4f8bc6c",
+      "workflow_run": {
+        "id": 37505944936,
+        "repository_id": 1407664922,
+        "head_repository_id": 1407664922,
+        "head_branch": "main",
+        "head_sha": "de900acbb1c8ff7a0ab49215da3abc899ef18720"
+      }
+    },
+    {
+      "id": 11431578220,
+      "name": "cpu-reproduction-evidence",
+      "size_in_bytes": 590284,
+      "url": "https://api.github.com/repos/tfyf103/agent-SFT-RL/actions/artifacts/11431578220",
+      "archive_download_url": "https://api.github.com/repos/tfyf103/agent-SFT-RL/actions/artifacts/11431578220/zip",
+      "expired": false,
+      "created_at": "2026-10-06T17:45:25Z",
+      "expires_at": "2026-11-05T17:45:24Z",
+      "updated_at": "2026-10-06T17:45:25Z",
+      "digest": "sha256:1136284383e2a248f432c77711dc561f465b80440b32b1417088f96b9aa8c5f5",
+      "workflow_run": {
+        "id": 37505944936,
+        "repository_id": 1407664922,
+        "head_repository_id": 1407664922,
+        "head_branch": "main",
+        "head_sha": "de900acbb1c8ff7a0ab49215da3abc899ef18720"
+      }
+    }
+  ],
+  "checkpoint_retention": "135M model and optimizer weights were verified during execution but not retained in uploaded artifact.",
+  "limitations": [
+    "No bank-task evaluation of the language model",
+    "No language-model GRPO run",
+    "No official tau benchmark run",
+    "No GPU or production bank deployment"
+  ],
+  "data_canonical_hashes_match_local": true
+}

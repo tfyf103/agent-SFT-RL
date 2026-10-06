@@ -1,0 +1,23 @@
+{
+  "kind": "synthetic_bank_workflows",
+  "version": 2,
+  "splits": {
+    "train": {
+      "n": 500,
+      "sha256": "1fae9b7f0ebf6954be5bc1ffe83c199a52a0a4409ff357587d36c84265a86bd2"
+    },
+    "valid": {
+      "n": 200,
+      "sha256": "8f8270bd5293b5be400a64edc04bc61dd97025a5df503f032a4c0a77b961e89b"
+    },
+    "test": {
+      "n": 200,
+      "sha256": "624c5b2c3c464a4886599d7aabcc0a9a159f183367a8115cc57d83a7b0118643"
+    },
+    "stress": {
+      "n": 200,
+      "sha256": "42950b9fd784911be32f01219bedc555afa9d1f1585b33f41796a436939a1cee"
+    }
+  },
+  "limitations": "Shared workflow semantics; held-out wording, entities, policy version labels and fault combinations; numeric threshold support is shared. Not unseen real bank workflows."
+}
