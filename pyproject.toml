@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bank-agent-lab"
+version = "0.1.0"
+description = "Synthetic banking workflow reliability and post-training laboratory"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+toy = ["numpy>=1.26,<3"]
+
+[tool.setuptools.packages.find]
+include = ["bank_agent*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,7 @@
+{
+  "synthetic_environment": "locally_tested",
+  "cpu_finite_action_policy": "3_seeds_executed",
+  "large_language_model_training": "not_yet_executed",
+  "official_tau_benchmark": "not_executed",
+  "bank_deployment": false
+}

@@ -1,0 +1,7 @@
+# Optional LLM training stack. CPU simulator/tests do not need these packages.
+# This is a compatibility range, not a validated lockfile or a claim of GPU execution.
+# Select the torch wheel matching your own CUDA runtime using pytorch.org instructions.
+torch>=2.3,<3
+transformers>=4.46,<5
+peft>=0.13,<1
+safetensors>=0.4,<1

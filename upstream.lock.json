@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-07",
+  "verification": "source-inspected; GPU training and external benchmark not executed",
+  "repositories": {
+    "slime": {
+      "url": "https://github.com/THUDM/slime",
+      "commit": "8c17b676cb57af1d17ee4402e91e9209af84b60b",
+      "license": "Apache-2.0"
+    },
+    "tau_bench": {
+      "url": "https://github.com/sierra-research/tau2-bench",
+      "commit": "5bfa7e37b36656b37dc6d022156be6563c1007f3",
+      "license": "MIT",
+      "role": "external evaluation only",
+      "retrieval_config": "bm25"
+    }
+  },
+  "model": {
+    "repo_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "license": "Apache-2.0",
+    "source": "https://huggingface.co/api/models/Qwen/Qwen3-4B-Instruct-2507"
+  },
+  "runtime": {
+    "container_image_digest": null,
+    "megatron_commit": null,
+    "sglang_version": null,
+    "explanation": "Record from actual compatible isolated container; no verified A800 image claimed."
+  },
+  "public_reference": {
+    "claim_type": "upstream_reported_not_reproduced",
+    "model": "GPT-5.2",
+    "domain": "banking_knowledge",
+    "pass_1_percent": 32.22,
+    "pass_4_percent": 18.56,
+    "retrieval_config": "alltools",
+    "user_simulator": "gpt-5.2",
+    "trials": 4,
+    "benchmark_version": "1.0.1",
+    "source": "https://github.com/sierra-research/tau2-bench/blob/5bfa7e37b36656b37dc6d022156be6563c1007f3/web/leaderboard/public/submissions/gpt-5-2_sierra_2026-02-26/submission.json",
+    "comparable_to_local_synthetic_results": false
+  }
+}
